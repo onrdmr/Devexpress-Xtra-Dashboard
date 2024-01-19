@@ -6,7 +6,7 @@
 # ASP.NET Core Reporting - Best Practices
 ## Important note 
 
-Argeset setxrm-reporting is in our teams evim destek.
+Argeset setxrm-reporting is in our teams evim destek on omni project folder.
 
 ## Introduction
 
