@@ -10,12 +10,13 @@
             <div class="col-md-4 offset-md-4">
                 <div class="card text-center card  bg-default mb-3">
                     <div class="card-header">
-                        LOGIN
+                        Giriş
                     </div>
                     <div class="card-body">
                         <select asp-for="UserId" class="form-control" asp-items="Model.Users"></select>
                         </br>
-                        <input type="password" class="form-control input-sm chat-input" placeholder="Password" />
+                            <input type="password" id="Password" name="Password" class="form-control" />
+                        
                     </div>
                     <div class="card-footer text-muted">
                         <button type="submit">Login</button>

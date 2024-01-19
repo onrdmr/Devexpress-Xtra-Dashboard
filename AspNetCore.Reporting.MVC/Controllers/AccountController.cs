@@ -23,18 +23,21 @@ namespace ConnectionProviderSample.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([FromServices] SchoolDbContext dbContext, string userId, string returnUrl) {
-            var user = await dbContext.Users.FindAsync(userId);
-            if(user != null) {
+        public async Task<IActionResult> Login([FromServices] SchoolDbContext dbContext, LoginRequest loginRequest, string returnUrl) {
+            var user = await dbContext.Users.FindAsync(loginRequest.UserID);
+            if(user != null && loginRequest.Password == "indata123*") {
                 await SignIn(user);
 
                 if(Url.IsLocalUrl(returnUrl)) {
                     return Redirect(returnUrl);
                 }
                 return RedirectToAction(nameof(HomeController.Index), "Home");
+            } else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
 
-            throw new SecurityException($"User not found by the ID: {userId}");
+            
         }
 
         [HttpPost]
@@ -45,6 +48,7 @@ namespace ConnectionProviderSample.Controllers {
 
         async Task SignIn(StudentIdentity user) {
             string userName = $"{user.FirstMidName} {user.LastName}";
+
 
             var claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, userName),
